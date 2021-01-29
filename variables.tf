@@ -24,3 +24,14 @@ variable "tags" {
   description = "(Optional) A map of tags to assign to the resource."
   default     = {}
 }
+
+variable "private_cluster_enabled" {
+  description = "Should the cluster have its API server only exposed on internal IP addresses."
+  type        = string
+  default     = "false"
+
+  validation {
+    condition     = var.private_cluster_enabled == "false" || var.private_cluster_enabled == "true"
+    error_message = "The value is a boolean."
+  }
+}

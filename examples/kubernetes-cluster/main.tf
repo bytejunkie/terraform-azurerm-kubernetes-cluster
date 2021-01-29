@@ -9,6 +9,7 @@ provider "azurerm" {
 module "resourcegroup" {
   source = "bytejunkie/resource-group/azurerm"
 
+  location       = "west europe"
   name_strings   = ["byt", "rsg", "aks"]
   name_separator = "-"
 
@@ -19,7 +20,7 @@ module "resourcegroup" {
 # this module
 #################
 
-module "container_registry" {
+module "kubernetes-cluster" {
   source = "../../"
 
   name_strings        = ["byt", "aks", "001"]
@@ -29,6 +30,8 @@ module "container_registry" {
   depends_on = [
     module.resourcegroup
   ]
+
+  private_cluster_enabled = "true"
 
   tags = {
     Environment = "Development"

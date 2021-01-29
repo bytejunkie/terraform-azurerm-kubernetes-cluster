@@ -3,7 +3,9 @@ resource "azurerm_kubernetes_cluster" "main" {
   location            = var.location
   resource_group_name = var.resource_group_name
 
-  dns_prefix = join(var.name_separator, var.name_strings)
+  dns_prefix              = join(var.name_separator, var.name_strings)
+  private_cluster_enabled = var.private_cluster_enabled
+
 
   default_node_pool {
     name       = "default"
